@@ -7,7 +7,7 @@
   "scripts": {
     "prepare": "husky",
     "lint": "npm run lint:scripts && npm run lint:styles",
-    "lint:scripts": "",
+    "lint:scripts": "npm --prefix cloud-hub run lint",
     "lint:styles": "prettier --check .",
     "format-code": "prettier . --write"
   },
