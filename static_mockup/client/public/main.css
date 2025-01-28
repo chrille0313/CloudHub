@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100vw;
+  color: #fff;
+  font-family: 'Lato', Arial, sans-serif;
+}
+
+.page-wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 1rem 3rem;
+}
+
+nav {
+  height: 100%;
+  width: 240px;
+  color: white;
+  padding: 1.5rem 0;
+
+  display: flex;
+  justify-content: space-between;
+
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+nav > section:first-child {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-spacer {
+  width: 240px;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-pic {
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  background-color: gray;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.h1 {
+  margin: 1rem;
+}
+
+.row {
+  display: flex;
+}
+
+.small-gap {
+  display: flex;
+  gap: 1rem;
+}
