@@ -1,0 +1,70 @@
+import {
+  Avatar,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+  Typography
+} from '@mui/material';
+
+import { Settings, Logout, Cloud, Groups, Dashboard } from '@mui/icons-material';
+import { JSX } from 'react';
+import Link from 'next/link';
+
+export interface NavItemProps {
+  href: string;
+  icon?: JSX.Element;
+  text?: string;
+}
+
+export function NavItem({ icon, text, href }: NavItemProps) {
+  return (
+    <ListItem disablePadding>
+      <ListItemButton href={href} LinkComponent={Link}>
+        {icon && <ListItemIcon sx={{ color: 'inherit' }}>{icon}</ListItemIcon>}
+        {text && <ListItemText primary={text} />}
+      </ListItemButton>
+    </ListItem>
+  );
+}
+
+export default function SideNavbar() {
+  const drawerWidth = 240;
+
+  const user = {
+    name: 'Robin Adams'
+  };
+
+  return (
+    <Drawer
+      variant="permanent"
+      anchor="left"
+      sx={{
+        width: drawerWidth,
+        '& .MuiDrawer-paper': {
+          width: drawerWidth,
+          justifyContent: 'space-between',
+          backgroundColor: 'primary.main',
+          color: 'primary.contrastText'
+        }
+      }}
+    >
+      <List>
+        <Stack alignItems="center" gap="0.75rem" padding="2rem">
+          <Avatar alt={user.name} sx={{ width: 100, height: 100 }} />
+          <Typography variant="h6">{user.name}</Typography>
+        </Stack>
+        <NavItem href="/dashboard" icon={<Dashboard />} text="Dashboard" />
+        <NavItem href="/clouds" icon={<Cloud />} text="My clouds" />
+        <NavItem href="/shared" icon={<Groups />} text="Shared clouds" />
+      </List>
+      <List>
+        <NavItem href="/settings" icon={<Settings />} text="Settings" />
+        <NavItem href="/logout" icon={<Logout />} text="Log out" />
+      </List>
+    </Drawer>
+  );
+}

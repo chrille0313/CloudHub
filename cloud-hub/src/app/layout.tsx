@@ -1,7 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import Navbar from '@/components/Navbar';
+import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 
 import theme from '@/themes/default';
 
@@ -20,13 +21,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const authenticated = true;
+
   return (
     <html lang="en">
       <body>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            {children}
+            <Box display="flex">
+              <Navbar authenticated={authenticated} />
+              {children}
+            </Box>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
