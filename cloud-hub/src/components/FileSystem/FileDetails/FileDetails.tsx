@@ -1,7 +1,9 @@
+/*
 export interface FileDetailsProps {
   // TODO
 }
+*/
 
-export default function FileDetails(props: FileDetailsProps) {
+export default function FileDetails() {
   // TODO
 }

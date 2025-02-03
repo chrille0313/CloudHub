@@ -1,7 +1,9 @@
+/*
 export interface FilePathProps {
   // TODO
 }
+*/
 
-export default function FilePath(props: FilePathProps) {
+export default function FilePath() {
   // TODO
 }

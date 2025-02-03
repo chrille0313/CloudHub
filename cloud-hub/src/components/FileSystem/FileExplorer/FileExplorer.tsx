@@ -1,7 +1,9 @@
+/*
 export interface FileExplorerProps {
   // TODO
 }
+*/
 
-export default function FileExplorer(props: FileExplorerProps) {
+export default function FileExplorer() {
   // TODO
 }
