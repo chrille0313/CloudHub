@@ -1,21 +1,33 @@
+export type User = {
+  id: string;
+  username: string;
+  email: string;
+  verified: boolean;
+  image?: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export type Folder = {
+  id: string;
   path: string;
-  files: File[];
-  sub_folders: Folder[];
+  files?: File[];
+  subFolders?: Folder[];
   size: number;
-  number_of_files: number;
-  created: Date;
-  updated: Date;
+  numberOfFiles: number;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type Cloud = {
+  id: string;
   name: string;
-  owner: string; // record_id
-  shared_with: string[]; // record_id
-  allocated_size: number;
-  used_size: number;
-  number_of_files: number;
+  owner: User;
+  sharedWith?: User[];
+  allocatedSize: number;
+  usedSize: number;
+  numberOfFiles: number;
   folders: Folder[];
-  created: Date;
-  updated: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };
