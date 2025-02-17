@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid2';
-import { CloudCard } from '@/components/Cards';
-import { TitledSection } from '@/components/Sections';
+import { CloudCard } from '@/ui/Cards';
+import { TitledSection } from '@/ui/Sections';
 
 export default function Clouds() {
   const clouds = [

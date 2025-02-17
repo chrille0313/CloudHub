@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
-import Navbar from '@/components/Navbar';
+import Navbar from '@/ui/Navbar';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 
 import theme from '@/themes/default';
