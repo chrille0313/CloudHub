@@ -1,45 +1,24 @@
-import { Cloud, User } from '@/types';
-import { NextRequest, NextResponse } from 'next/server';
-import { clouds } from '../static_data';
-
-const testUser: User = {
-  id: '3622c012-a12e-4c52-9863-4771fb2dbe5a',
-  username: 'testUser',
-  email: 'test@user1.com',
-  verified: true,
-  createdAt: new Date(2020, 1, 1),
-  updatedAt: new Date(2024, 2, 2)
-};
+import { NextRequest } from 'next/server';
+import { getCloudById, updateCloudById, deleteCloudById } from '@/components/Cloud/service';
+import { ApiResponseFactory } from '../types';
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id;
-
-  const cloud = clouds.find((cloud) => cloud.id === id);
+  const cloud = await getCloudById(id);
 
   if (!cloud) {
-    // TODO: return correct response
-    return NextResponse.error();
+    return ApiResponseFactory.error('Cloud not found', 404);
   }
 
-  return NextResponse.json(cloud);
+  return ApiResponseFactory.success(cloud);
 }
 
-export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id;
+  const data = await request.json();
+  const updatedCloud = await updateCloudById(id, data);
 
-  const updatedCloud: Cloud = {
-    id: id,
-    name: 'testCloud1',
-    owner: testUser,
-    allocatedSize: 2000000,
-    usedSize: 200000,
-    numberOfFiles: 6,
-    folders: [],
-    createdAt: new Date(2021, 3, 3),
-    updatedAt: new Date(2021, 4, 4)
-  };
-
-  return NextResponse.json(updatedCloud, { status: 200 });
+  return ApiResponseFactory.success(updatedCloud);
 }
 
 export async function DELETE(
@@ -47,6 +26,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const id = (await params).id;
+  await deleteCloudById(id);
 
-  return NextResponse.json({}, { status: 204 });
+  return ApiResponseFactory.success(null);
 }

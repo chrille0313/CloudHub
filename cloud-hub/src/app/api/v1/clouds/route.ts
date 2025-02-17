@@ -1,26 +1,25 @@
-import { Cloud, User } from '@/types';
-import { NextRequest, NextResponse } from 'next/server';
-import { clouds } from './static_data';
+import InMemoryDB from '@/../db/in_memory';
+import { NextRequest } from 'next/server';
+import { Cloud, createCloudSchema } from '@/components/Cloud/types';
+import { getAllClouds, createCloud } from '@/components/Cloud/service';
+import { ApiResponse, ApiResponseFactory } from './types';
 
-export async function GET() {
-  return NextResponse.json(clouds);
+export async function GET(): Promise<ApiResponse<Cloud[]>> {
+  const clouds = await getAllClouds();
+  return ApiResponseFactory.success(clouds);
 }
 
-export async function POST(request: NextRequest) {
-  const body: Pick<Cloud, 'name' | 'allocatedSize'> = await request.json();
+export async function POST(request: NextRequest): Promise<ApiResponse<Cloud>> {
+  const data = (await request.json()) as Pick<Cloud, 'name' | 'allocatedSize' | 'owner'>;
+  data.owner = InMemoryDB.authenticatedUser;
 
-  const newCloud: Cloud = {
-    id: '8236f7af-c665-4cec-8d25-ea56e2cb3714',
-    name: body.name,
-    owner: testUser,
-    allocatedSize: body.allocatedSize,
-    usedSize: 0,
-    numberOfFiles: 0,
-    folders: [],
-    createdAt: new Date(),
-    updatedAt: new Date()
-  };
+  const validation = createCloudSchema.safeParse(data);
 
-  //return NextResponse.json(newCloud, { status: 201 });
-  return NextResponse.json(body, { status: 201 });
+  if (!validation.success) {
+    return ApiResponseFactory.error(validation.error.message, 400);
+  }
+
+  const newCloud = await createCloud(validation.data);
+
+  return ApiResponseFactory.success(newCloud, 201);
 }
