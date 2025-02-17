@@ -22,4 +22,9 @@ export const createCloudSchema = z.object({
   allocatedSize: z.number()
 });
 
+export const updateCloudSchema = z.object({
+  name: z.string().optional(),
+  allocatedSize: z.number().optional()
+});
+
 export type Cloud = z.infer<typeof cloudSchema>;
