@@ -11,11 +11,13 @@ import {
 } from '@mui/material';
 
 import { Delete, Download, Edit, Group, Settings, Share } from '@mui/icons-material';
+import NextLink from 'next/link';
 import MoreButton from './MoreButton';
 import { formatNumber } from '@/utils';
+import { Cloud } from '@/components/Cloud/types';
 
 export interface CloudCardProps extends CardProps {
-  cloud: { name: string; size: number; shared: boolean };
+  cloud: Cloud;
 }
 
 export default function CloudCard({ cloud, ...props }: CloudCardProps) {
@@ -27,17 +29,19 @@ export default function CloudCard({ cloud, ...props }: CloudCardProps) {
     { icon: <Settings />, text: 'Settings' }
   ];
 
+  const url = `/clouds/${cloud.id}`;
+
   return (
     <Card sx={{ position: 'relative' }} {...props}>
-      <CardActionArea>
+      <CardActionArea LinkComponent={NextLink} href={url}>
         <CardMedia image="images/CloudCardPlaceholder.jpg" sx={{ height: 150 }} />
         <CardContent>
           <Box display="flex" alignItems="center" gap={1}>
             <Typography>{cloud.name}</Typography>
-            {cloud.shared && <Group sx={{ color: 'text.secondary' }} />}
+            {cloud.sharedWith?.length && <Group sx={{ color: 'text.secondary' }} />}
           </Box>
           <Typography variant="body2" color="text.secondary">
-            {formatNumber(cloud.size, 'B')}
+            {formatNumber(cloud.allocatedSize, 'B')}
           </Typography>
         </CardContent>
       </CardActionArea>
