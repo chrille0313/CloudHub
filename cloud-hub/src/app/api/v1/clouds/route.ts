@@ -1,15 +1,15 @@
 import InMemoryDB from '@/../db/in_memory';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { Cloud, createCloudSchema } from '@/components/Cloud/types';
 import { getAllClouds, createCloud } from '@/components/Cloud/service';
 import { ApiResponse, ApiResponseFactory } from './types';
 
-export async function GET(): Promise<ApiResponse<Cloud[]>> {
+export async function GET(): Promise<NextResponse<ApiResponse<Cloud[]>>> {
   const clouds = await getAllClouds();
   return ApiResponseFactory.success(clouds);
 }
 
-export async function POST(request: NextRequest): Promise<ApiResponse<Cloud>> {
+export async function POST(request: NextRequest): Promise<NextResponse<ApiResponse<Cloud>>> {
   const data = (await request.json()) as Pick<Cloud, 'name' | 'allocatedSize' | 'owner'>;
   data.owner = InMemoryDB.authenticatedUser;
 
