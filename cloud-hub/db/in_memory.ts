@@ -12,6 +12,10 @@ export class InMemoryDB {
   };
 
   public clouds: Cloud[] = [];
+
+  public pushCloud(cloud: Cloud) {
+    this.clouds.push(cloud);
+  }
 }
 
 const inMemoryDB = new InMemoryDB();
