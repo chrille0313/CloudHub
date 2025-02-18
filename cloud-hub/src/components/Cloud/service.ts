@@ -34,7 +34,7 @@ export async function createCloud(
     ...attributes
   };
 
-  InMemoryDB.clouds.push(cloud);
+  InMemoryDB.pushCloud(cloud);
 
   return cloud;
 }
