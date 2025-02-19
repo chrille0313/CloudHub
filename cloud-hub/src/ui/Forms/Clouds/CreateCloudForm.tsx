@@ -8,8 +8,7 @@ import { Button, MenuItem, TextField } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
 export async function handleSubmit(formData: FormData) {
-  'use client';
-  await api.post('/clouds', {});
+  await api.post('/clouds', formData);
 
   revalidatePath('/clouds');
 }
