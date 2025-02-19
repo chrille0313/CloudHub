@@ -1,7 +1,6 @@
 'use client';
 
 import { Dialog, DialogContent, DialogProps, DialogTitle } from '@mui/material';
-import { useRouter } from 'next/router';
 
 export interface ModalProps extends Omit<DialogProps, 'open'> {
   title?: string;
