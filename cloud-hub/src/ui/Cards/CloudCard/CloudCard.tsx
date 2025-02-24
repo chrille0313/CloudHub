@@ -29,11 +29,9 @@ export default function CloudCard({ cloud, ...props }: CloudCardProps) {
     { icon: <Settings />, text: 'Settings' }
   ];
 
-  const url = `/clouds/${cloud.id}`;
-
   return (
     <Card sx={{ position: 'relative' }} {...props}>
-      <CardActionArea LinkComponent={NextLink} href={url}>
+      <CardActionArea LinkComponent={NextLink} href={`/clouds/${cloud.id}`}>
         <CardMedia image="images/CloudCardPlaceholder.jpg" sx={{ height: 150 }} />
         <CardContent>
           <Box display="flex" alignItems="center" gap={1}>
