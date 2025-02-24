@@ -12,7 +12,7 @@ import {
 
 import { Delete, Download, Edit, Group, Settings, Share } from '@mui/icons-material';
 import NextLink from 'next/link';
-import MoreButton from './MoreButton';
+import MoreButton, { MenuItemProps } from './MoreButton';
 import { formatNumber } from '@/utils';
 import { Cloud } from '@/components/Cloud/types';
 
@@ -21,7 +21,7 @@ export interface CloudCardProps extends CardProps {
 }
 
 export default function CloudCard({ cloud, ...props }: CloudCardProps) {
-  const menuItems = [
+  const menuItems: MenuItemProps[] = [
     { icon: <Edit />, text: 'Rename' },
     { icon: <Delete />, text: 'Delete', divider: true },
     { icon: <Share />, text: 'Share' },
