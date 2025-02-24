@@ -46,7 +46,7 @@ export default function CreateCloudForm() {
             <TextField
               name="allocatedSize"
               label="Allocated size"
-              // type="number"
+              type="number"
               autoComplete="false"
               required
               fullWidth
