@@ -45,7 +45,7 @@ export default function CloudCard({ cloud, ...props }: CloudCardProps) {
             {cloud.sharedWith?.length && <Group sx={{ color: 'text.secondary' }} />}
           </Box>
           <Typography variant="body2" color="text.secondary">
-            {formatNumber(cloud.allocatedSize, 'B')}
+            {formatNumber(cloud.usedSize, 'B')} / {formatNumber(cloud.allocatedSize, 'B')}
           </Typography>
         </CardContent>
       </CardActionArea>
