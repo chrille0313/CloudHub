@@ -15,6 +15,8 @@ import NextLink from 'next/link';
 import MoreButton, { MenuItemProps } from './MoreButton';
 import { formatNumber } from '@/utils';
 import { Cloud } from '@/components/Cloud/types';
+import CloudCardPlaceholder from '@/../public/images/CloudCardPlaceholder.jpg';
+import NextImage from 'next/image';
 
 export interface CloudCardProps extends CardProps {
   cloud: Cloud;
@@ -32,7 +34,11 @@ export default function CloudCard({ cloud, ...props }: CloudCardProps) {
   return (
     <Card sx={{ position: 'relative' }} {...props}>
       <CardActionArea LinkComponent={NextLink} href={`/clouds/${cloud.id}`}>
-        <CardMedia image="images/CloudCardPlaceholder.jpg" sx={{ height: 150 }} />
+        <CardMedia sx={{ height: 150 }}>
+          <Box position="relative" width="100%" height="100%">
+            <NextImage src={CloudCardPlaceholder} alt="Cloud card placeholder" />
+          </Box>
+        </CardMedia>
         <CardContent>
           <Box display="flex" alignItems="center" gap={1}>
             <Typography>{cloud.name}</Typography>
