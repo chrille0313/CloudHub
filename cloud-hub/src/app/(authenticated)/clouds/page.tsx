@@ -13,7 +13,7 @@ export default async function Clouds() {
 
   return (
     <TitledSection title="My Clouds" padding="2rem" gap="1rem" flex={1}>
-      <Grid container spacing={{ xs: 2, md: 3 }}>
+      <Grid container spacing={{ xs: 2, md: 3 }} minHeight={200}>
         <Grid size={cloudCardSizeSx}>
           <CreateNewCloudCard />
         </Grid>
