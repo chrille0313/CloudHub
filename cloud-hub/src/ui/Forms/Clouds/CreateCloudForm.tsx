@@ -1,49 +1,62 @@
 'use client';
 
-import { revalidatePath } from 'next/cache';
-import Form from 'next/form';
-import { api } from '@/lib';
 import Grid from '@mui/material/Grid2';
-import { Button, MenuItem, TextField } from '@mui/material';
+import { MenuItem, TextField } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-
-export async function handleSubmit(formData: FormData) {
-  await api.post('/clouds', formData);
-
-  revalidatePath('/clouds');
-}
+import Form from 'next/form';
+import createCloudAction from '@/components/Cloud/actions';
+import SubmitButton from '@/ui/Forms/SubmitButton';
+import { useActionState } from 'react';
 
 const sizeUnits = ['B', 'KB', 'MB', 'GB', 'TB'];
 
 // TODO: Add suspense
 export default function CreateCloudForm() {
+  const initialState = {
+    data: {
+      name: '',
+      allocatedSize: 0
+    },
+    errors: {
+      _errors: []
+    }
+  };
+
+  const [state, formAction] = useActionState(createCloudAction, initialState);
+
   return (
-    <Form action={handleSubmit} autoComplete="off">
+    <Form action={formAction} autoComplete="off">
       <Grid container spacing={2}>
         <Grid size="grow">
           <TextField
-            id="name"
+            name="name"
             label="Name"
             type="text"
             autoComplete="false"
             required
             autoFocus
             fullWidth
+            defaultValue={state.data.name}
+            error={state.errors.name !== undefined}
+            helperText={state.errors.name?._errors.join(', ')}
           />
         </Grid>
         <Grid container size={12}>
           <Grid size="grow">
             <TextField
-              id="allocatedSize"
+              name="allocatedSize"
               label="Allocated size"
-              type="number"
+              // type="number"
               autoComplete="false"
               required
               fullWidth
+              defaultValue={state.data.allocatedSize}
+              error={state.errors.allocatedSize !== undefined}
+              helperText={state.errors.allocatedSize?._errors.join(', ')}
             />
           </Grid>
           <Grid size="auto">
-            <TextField id="sizeUnit" label="Unit" select defaultValue="GB" required>
+            <TextField name="sizeUnit" label="Unit" select defaultValue="GB" required>
               {sizeUnits.map((unit) => (
                 <MenuItem key={unit} value={unit}>
                   {unit}
@@ -52,9 +65,9 @@ export default function CreateCloudForm() {
             </TextField>
           </Grid>
           <Grid size={12}>
-            <Button type="submit" variant="contained" endIcon={<SendIcon />} fullWidth>
+            <SubmitButton endIcon={<SendIcon />} fullWidth>
               Create
-            </Button>
+            </SubmitButton>
           </Grid>
         </Grid>
       </Grid>
