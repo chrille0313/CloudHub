@@ -6,7 +6,7 @@ import NextLink from 'next/link';
 
 export default function CreateNewCloudCard() {
   return (
-    <Card variant="outlined" sx={{ height: '100%' }}>
+    <Card variant="outlined" sx={{ height: '100%', borderStyle: 'dashed', borderWidth: 2 }}>
       <CardActionArea
         LinkComponent={NextLink}
         href="/clouds/new"
