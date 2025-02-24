@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid2';
 import { MenuItem, TextField } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import Form from 'next/form';
-import createCloudAction from '@/components/Cloud/actions';
+import { createCloudAction } from '@/components/Cloud/actions';
 import SubmitButton from '@/ui/Forms/SubmitButton';
 import { useActionState } from 'react';
 

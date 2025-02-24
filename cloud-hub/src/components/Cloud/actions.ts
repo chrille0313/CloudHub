@@ -12,7 +12,7 @@ export type CreateCloudActionState = {
   errors: ZodFormattedError<CreateCloud>;
 };
 
-export default async function createCloudAction(
+export async function createCloudAction(
   prevState: CreateCloudActionState,
   formData: FormData
 ): Promise<CreateCloudActionState> {
