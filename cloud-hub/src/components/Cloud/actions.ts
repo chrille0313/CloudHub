@@ -1,7 +1,7 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import { createCloud } from './service';
+import { createCloud, deleteCloudById } from './service';
 import { CreateCloud, createCloudSchema } from './types';
 import inMemoryDB from '../../../db/in_memory';
 import { revalidatePath } from 'next/cache';
@@ -35,4 +35,10 @@ export async function createCloudAction(
   const cloud = await createCloud(data);
   revalidatePath('/clouds');
   redirect(`/clouds/${cloud.id}`);
+}
+
+export async function deleteCloudAction(id: string) {
+  await deleteCloudById(id);
+  revalidatePath('/clouds');
+  redirect('/clouds');
 }
