@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardActionArea, CardProps } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from '@mui/icons-material/AddCircle';
 import NextLink from 'next/link';
 
 export type CreateNewCloudCardProps = CardProps;
@@ -16,9 +16,14 @@ export default function CreateNewCloudCard(props: CreateNewCloudCardProps) {
       <CardActionArea
         LinkComponent={NextLink}
         href="/clouds/new"
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%'
+        }}
       >
-        <AddIcon color="action" />
+        <AddIcon color="disabled" />
       </CardActionArea>
     </Card>
   );
