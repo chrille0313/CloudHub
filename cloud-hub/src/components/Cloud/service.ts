@@ -1,3 +1,5 @@
+'server-only';
+
 import InMemoryDB from '@/../db/in_memory';
 import { Cloud } from './types';
 
