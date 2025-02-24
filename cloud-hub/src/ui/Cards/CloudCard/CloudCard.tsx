@@ -40,8 +40,8 @@ export default function CloudCard({ cloud, ...props }: CloudCardProps) {
           </Box>
         </CardMedia>
         <CardContent>
-          <Box display="flex" alignItems="center" gap={1}>
-            <Typography>{cloud.name}</Typography>
+          <Box display="flex" alignItems="center" gap={1} paddingRight={4}>
+            <Typography noWrap>{cloud.name}</Typography>
             {cloud.sharedWith?.length && <Group sx={{ color: 'text.secondary' }} />}
           </Box>
           <Typography variant="body2" color="text.secondary">
