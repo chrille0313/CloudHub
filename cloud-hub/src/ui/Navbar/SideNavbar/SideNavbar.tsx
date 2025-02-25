@@ -1,37 +1,8 @@
-import {
-  Avatar,
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Stack,
-  Typography
-} from '@mui/material';
-
+import { Avatar, Drawer, List, Stack, Typography } from '@mui/material';
 import { Settings, Logout, Cloud, Groups, Dashboard } from '@mui/icons-material';
-import { JSX } from 'react';
-import Link from 'next/link';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
-
-export interface NavItemProps {
-  href: string;
-  icon?: JSX.Element;
-  text?: string;
-}
-
-export function NavItem({ icon, text, href }: NavItemProps) {
-  return (
-    <ListItem disablePadding>
-      <ListItemButton href={href} LinkComponent={Link}>
-        {icon && <ListItemIcon sx={{ color: 'inherit' }}>{icon}</ListItemIcon>}
-        {text && <ListItemText primary={text} />}
-      </ListItemButton>
-    </ListItem>
-  );
-}
+import { NavItem } from './NavItem';
 
 export default async function SideNavbar() {
   const drawerWidth = 240;
@@ -50,9 +21,9 @@ export default async function SideNavbar() {
         width: drawerWidth,
         '& .MuiDrawer-paper': {
           width: drawerWidth,
-          justifyContent: 'space-between',
-          backgroundColor: 'primary.main',
-          color: 'primary.contrastText'
+          justifyContent: 'space-between'
+          // backgroundColor: 'primary.main',
+          // color: 'primary.contrastText'
         }
       }}
     >
