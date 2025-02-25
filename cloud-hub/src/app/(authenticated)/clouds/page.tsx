@@ -31,13 +31,11 @@ export default async function Clouds() {
       ) : (
         <Stack marginTop="10%" alignItems="center" justifyContent="center" gap={2}>
           <Box maxWidth={200}>
-            <Image src={NoData} alt="No data" />
+            <Image src={NoData} alt="No data" priority />
           </Box>
           <Stack alignItems="center" gap={1}>
             <Typography variant="h4">No Clouds Found</Typography>
-            <Typography variant="body1" fontWeight="italic">
-              Get started by creating a new cloud below
-            </Typography>
+            <Typography variant="body1">Get started by creating a new cloud below</Typography>
           </Stack>
           <Button
             variant="contained"
