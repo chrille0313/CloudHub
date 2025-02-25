@@ -33,7 +33,7 @@ export default function SignOutPage() {
     >
       <Stack gap="1.5rem" justifyContent="center" alignItems="center">
         <Box maxHeight={350}>
-          <Image src={Graphic} alt="Sign Out" />
+          <Image src={Graphic} alt="Sign Out" priority />
         </Box>
         <Typography variant="h4">Signing Out...</Typography>
         <Box maxWidth={300} width="100%">
