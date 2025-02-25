@@ -1,9 +1,9 @@
+'server-only';
+
 import InMemoryDB from '@/../db/in_memory';
 import { Cloud } from './types';
 
 export async function getAllClouds(): Promise<Cloud[]> {
-  console.log(InMemoryDB.clouds);
-  console.log(InMemoryDB.authenticatedUser);
   return InMemoryDB.clouds.filter((cloud) => cloud.owner.id === InMemoryDB.authenticatedUser.id);
 }
 
