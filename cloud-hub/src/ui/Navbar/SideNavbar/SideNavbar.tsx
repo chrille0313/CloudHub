@@ -13,6 +13,8 @@ import {
 import { Settings, Logout, Cloud, Groups, Dashboard } from '@mui/icons-material';
 import { JSX } from 'react';
 import Link from 'next/link';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 export interface NavItemProps {
   href: string;
@@ -31,12 +33,14 @@ export function NavItem({ icon, text, href }: NavItemProps) {
   );
 }
 
-export default function SideNavbar() {
+export default async function SideNavbar() {
   const drawerWidth = 240;
 
-  const user = {
-    name: 'Robin Adams'
-  };
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
+
+  const user = session?.user;
 
   return (
     <Drawer
@@ -54,8 +58,8 @@ export default function SideNavbar() {
     >
       <List>
         <Stack alignItems="center" gap="0.75rem" padding="2rem">
-          <Avatar alt={user.name} sx={{ width: 100, height: 100 }} />
-          <Typography variant="h6">{user.name}</Typography>
+          <Avatar alt={user?.name} sx={{ width: 100, height: 100 }} />
+          <Typography variant="h6">{user?.name}</Typography>
         </Stack>
         <NavItem href="/dashboard" icon={<Dashboard />} text="Dashboard" />
         <NavItem href="/clouds" icon={<Cloud />} text="My clouds" />
@@ -63,7 +67,7 @@ export default function SideNavbar() {
       </List>
       <List>
         <NavItem href="/settings" icon={<Settings />} text="Settings" />
-        <NavItem href="/logout" icon={<Logout />} text="Log out" />
+        <NavItem href="/sign-out" icon={<Logout />} text="Log out" />
       </List>
     </Drawer>
   );
