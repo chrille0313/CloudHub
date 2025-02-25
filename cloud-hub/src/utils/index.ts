@@ -8,5 +8,5 @@ export function formatNumber(size: number, unit: string) {
 }
 
 export function formatAPIErrorMessage(message: APIError['message']) {
-  return message.replace(/^API Error: \S+ /, "");
+  return message.replace(/^API Error: \S+ /, '');
 }
