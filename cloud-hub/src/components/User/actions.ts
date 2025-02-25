@@ -5,16 +5,28 @@ import { redirect } from 'next/navigation';
 import { authenticateUser, createUser } from './service';
 import { APIError } from 'better-auth/api';
 import { formatAPIErrorMessage } from '@/utils';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
-export type SignUpUserActionState = {
-  data: SignUpUser;
-  errors: ZodFormattedError<SignUpUser>;
-};
+export type SignUpUserActionState =
+  | {
+      data: SignUpUser;
+      errors?: ZodFormattedError<SignUpUser>;
+    }
+  | undefined;
 
 export async function signUpUserAction(
   prevState: SignUpUserActionState,
   formData: FormData
 ): Promise<SignUpUserActionState> {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
+
+  if (session) {
+    return;
+  }
+
   const submittedData = Object.fromEntries(formData.entries()) as SignUpUser;
 
   const validation = signUpUserSchema.safeParse(submittedData);
@@ -50,15 +62,25 @@ export async function signUpUserAction(
   redirect('/dashboard');
 }
 
-export type SignInUserActionState = {
-  data: AuthenticateUser;
-  errors: ZodFormattedError<AuthenticateUser>;
-};
+export type SignInUserActionState =
+  | {
+      data: AuthenticateUser;
+      errors?: ZodFormattedError<AuthenticateUser>;
+    }
+  | undefined;
 
 export async function signInUserAction(
   prevState: SignInUserActionState,
   formData: FormData
 ): Promise<SignInUserActionState> {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
+
+  if (session) {
+    return;
+  }
+
   const submittedData = Object.fromEntries(formData.entries()) as AuthenticateUser;
 
   const validation = authenticateUserSchema.safeParse(submittedData);

@@ -9,21 +9,11 @@ import SubmitButton from '@/ui/Forms/SubmitButton';
 import { useActionState } from 'react';
 
 export default function SignInForm() {
-  const initialState = {
-    data: {
-      email: '',
-      password: ''
-    },
-    errors: {
-      _errors: []
-    }
-  };
-
-  const [state, formAction] = useActionState(signInUserAction, initialState);
+  const [state, formAction] = useActionState(signInUserAction, undefined);
 
   return (
     <Stack gap={3}>
-      {state.errors._errors.map((error) => (
+      {state?.errors?._errors.map((error) => (
         <Alert severity="error" key={error}>
           {error}
         </Alert>
@@ -38,9 +28,9 @@ export default function SignInForm() {
               required
               autoFocus
               fullWidth
-              defaultValue={state.data.email}
-              error={state.errors.email !== undefined}
-              helperText={state.errors.email?._errors.join(', ')}
+              defaultValue={state?.data.email}
+              error={state?.errors?.email !== undefined}
+              helperText={state?.errors?.email?._errors.join(', ')}
             />
           </Grid>
           <Grid container size={12}>
@@ -52,9 +42,9 @@ export default function SignInForm() {
                 autoComplete="current-password"
                 required
                 fullWidth
-                defaultValue={state.data.password}
-                error={state.errors.password !== undefined}
-                helperText={state.errors.password?._errors.join(', ')}
+                defaultValue={state?.data.password}
+                error={state?.errors?.password !== undefined}
+                helperText={state?.errors?.password?._errors.join(', ')}
               />
             </Grid>
             <Grid size={12}>

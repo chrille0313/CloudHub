@@ -9,24 +9,11 @@ import SubmitButton from '@/ui/Forms/SubmitButton';
 import { useActionState } from 'react';
 
 export default function SignUpForm() {
-  const initialState = {
-    data: {
-      name: '',
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    },
-    errors: {
-      _errors: []
-    }
-  };
-
-  const [state, formAction] = useActionState(signUpUserAction, initialState);
+  const [state, formAction] = useActionState(signUpUserAction, undefined);
 
   return (
     <Stack gap={3}>
-      {state.errors._errors.map((error) => (
+      {state?.errors?._errors.map((error) => (
         <Alert severity="error" key={error}>
           {error}
         </Alert>
@@ -41,9 +28,9 @@ export default function SignUpForm() {
               required
               autoFocus
               fullWidth
-              defaultValue={state.data.name}
-              error={state.errors.name !== undefined}
-              helperText={state.errors.name?._errors.join(', ')}
+              defaultValue={state?.data.name}
+              error={state?.errors?.name !== undefined}
+              helperText={state?.errors?.name?._errors.join(', ')}
             />
           </Grid>
           <Grid container size={12}>
@@ -55,9 +42,9 @@ export default function SignUpForm() {
                 autoComplete="true"
                 required
                 fullWidth
-                defaultValue={state.data.username}
-                error={state.errors.username !== undefined}
-                helperText={state.errors.username?._errors.join(', ')}
+                defaultValue={state?.data.username}
+                error={state?.errors?.username !== undefined}
+                helperText={state?.errors?.username?._errors.join(', ')}
               />
             </Grid>
             <Grid size="grow">
@@ -68,9 +55,9 @@ export default function SignUpForm() {
                 autoComplete="email"
                 required
                 fullWidth
-                defaultValue={state.data.email}
-                error={state.errors.email !== undefined}
-                helperText={state.errors.email?._errors.join(', ')}
+                defaultValue={state?.data.email}
+                error={state?.errors?.email !== undefined}
+                helperText={state?.errors?.email?._errors.join(', ')}
               />
             </Grid>
             <Grid size="grow">
@@ -81,9 +68,9 @@ export default function SignUpForm() {
                 autoComplete="current-password"
                 required
                 fullWidth
-                defaultValue={state.data.password}
-                error={state.errors.password !== undefined}
-                helperText={state.errors.password?._errors.join(', ')}
+                defaultValue={state?.data.password}
+                error={state?.errors?.password !== undefined}
+                helperText={state?.errors?.password?._errors.join(', ')}
               />
             </Grid>
             <Grid size="grow">
@@ -93,9 +80,9 @@ export default function SignUpForm() {
                 type="password"
                 required
                 fullWidth
-                defaultValue={state.data.confirmPassword}
-                error={state.errors.confirmPassword !== undefined}
-                helperText={state.errors.confirmPassword?._errors.join(', ')}
+                defaultValue={state?.data.confirmPassword}
+                error={state?.errors?.confirmPassword !== undefined}
+                helperText={state?.errors?.confirmPassword?._errors.join(', ')}
               />
             </Grid>
             <Grid size={12}>
