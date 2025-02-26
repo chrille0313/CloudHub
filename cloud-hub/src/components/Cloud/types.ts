@@ -16,15 +16,18 @@ export const cloudSchema = z.object({
   updatedAt: z.date()
 });
 
+export type Cloud = z.infer<typeof cloudSchema>;
+
 export const createCloudSchema = z.object({
-  name: z.string(),
-  owner: userSchema,
-  allocatedSize: z.number()
+  name: z.string().nonempty().max(255),
+  allocatedSize: z.coerce.number().int().min(1)
 });
+
+export type CreateCloud = z.infer<typeof createCloudSchema>;
 
 export const updateCloudSchema = z.object({
   name: z.string().optional(),
   allocatedSize: z.number().optional()
 });
 
-export type Cloud = z.infer<typeof cloudSchema>;
+export type UpdateCloud = z.infer<typeof updateCloudSchema>;
